@@ -1,0 +1,9 @@
+.mails-list {
+  text-align: center;
+}
+
+.empty-message {
+  color: #787878;
+  font-style: italic;
+  line-height: 24px;
+}

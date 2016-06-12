@@ -1,0 +1,95 @@
+{
+  "name": "smtp-dev-tool",
+  "version": "0.1.0",
+  "description": "A Dev SMTP Server with browser preview",
+  "main": "server/index.js",
+  "scripts": {
+    "dev:serve": "better-npm-run dev:serve",
+    "dev:client": "better-npm-run dev:client",
+    "dev": "concurrently \"npm run dev:serve\" \"npm run dev:client\"",
+    "dev:send": "better-npm-run dev:send",
+    "prod:build": "better-npm-run prod:build",
+    "prod:serve": "better-npm-run prod:serve",
+    "start": "concurrently \"npm run prod:build\" \"http-server public/ -p 8081\" \"npm run prod:serve\""
+  },
+  "betterScripts": {
+    "dev:serve": {
+      "command": "nodemon server/index",
+      "env": {
+        "NODE_ENV": "dev",
+        "PORT": 8080,
+        "HOST": "localhost",
+        "SMTP_PORT": 5000,
+        "SMTP_HOST": "localhost"
+      }
+    },
+    "dev:client": {
+      "command": "webpack-dev-server --config ./webpack/webpack.config.dev.js",
+      "env": {
+        "NODE_ENV": "dev",
+        "PORT": 8080,
+        "HOST": "localhost",
+        "SMTP_PORT": 5000,
+        "SMTP_HOST": "localhost"
+      }
+    },
+    "dev:send": {
+      "command": "node script/sendMail",
+      "env": {
+        "NODE_ENV": "dev",
+        "SMTP_PORT": 5000,
+        "SMTP_HOST": "localhost"
+      }
+    },
+    "prod:serve": {
+      "command": "node server/index",
+      "env": {
+        "NODE_ENV": "production",
+        "PORT": 8080,
+        "HOST": "localhost",
+        "SMTP_PORT": 5000,
+        "SMTP_HOST": "localhost"
+      }
+    },
+    "prod:build": {
+      "command": "webpack --progress --config webpack/webpack.config.production.js",
+      "env": {
+        "NODE_ENV": "production",
+        "PORT": 8080,
+        "HOST": "localhost",
+        "SMTP_PORT": 5000,
+        "SMTP_HOST": "localhost"
+      }
+    }
+  },
+  "author": "antoinechalifour <antoine.chalifour@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "react": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "reset.css": "^2.0.2",
+    "smtp-server": "^1.9.1",
+    "socket.io": "^1.4.6",
+    "socket.io-client": "^1.4.6",
+    "utf8": "^2.1.1",
+    "webpack-dev-server": "^1.14.1"
+  },
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.5.0",
+    "better-npm-run": "0.0.8",
+    "concurrently": "^2.1.0",
+    "css-loader": "^0.23.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "html-webpack-plugin": "^2.21.0",
+    "nodemailer": "^2.4.2",
+    "nodemon": "^1.9.2",
+    "react-hot-loader": "^1.3.0",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.13.1"
+  }
+}

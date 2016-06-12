@@ -1,0 +1,19 @@
+.search-wrapper {
+  width: 98%;
+  max-width: 350px;
+  margin: 32px auto;
+  background-color: #fff;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, .13);
+  padding: 16px;
+}
+
+.search {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #787878;
+  font-size: 16px;
+}

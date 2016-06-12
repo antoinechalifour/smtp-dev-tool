@@ -1,0 +1,31 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: #fff;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, .54);
+}
+
+.status {
+  position: relative;
+}
+
+.connected::before,
+.disconnected::before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: -24px;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+}
+
+.connected::before {
+  background-color: #4CAF50;
+}
+
+.disconnected::before {
+  background-color: #F44336;
+}
