@@ -1,3 +1,7 @@
+'use strict'
+
+const cheerio = require('cheerio')
+
 const smtpMessageToJson = input => {
   const parts = input.split('\n\r\n\r')
   const meta = parts[0]
@@ -19,12 +23,22 @@ const smtpMessageToJson = input => {
       return obj
     }, {})
 
-  const message = messageRaw
+  let message = messageRaw
     .split('=\r\n')
     .join(' ')
     .split('=3D')
     .join('=')
-  email.message = message
+
+  const $ = cheerio.load(message)
+  $('body').append(
+    `<script type="text/javascript">
+      window.onload = function() {
+        window.parent.postMessage(document.body.scrollHeight, '*')
+      }
+    </script>`
+  )
+
+  email.message = $.html()
   return email
 }
 
