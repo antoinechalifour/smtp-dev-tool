@@ -662,7 +662,8 @@ const mailOptions = {
         </center>
       </body>
     </html>
-  `
+  `,
+  // text: 'Hello world',
 }
 
 console.log(`Sending mail to: smtp://${smtpHost}:${smtpPort}`)

@@ -23,7 +23,7 @@ export default class MailsList extends Component {
 
     return (
       <div>
-        {emails.map((email, i) => <Mail key={i} {...email} />)}
+        {emails.map(email => <Mail key={email.id} {...email} />)}
       </div>
     )
   }

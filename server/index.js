@@ -2,7 +2,6 @@ const env = process.env.NODE_ENV = process.env.NODE_ENV || 'dev'
 const express = require('express')
 const compression = require('compression')
 const socketIo = require('socket.io')
-const uuid = require('node-uuid')
 
 const app = express()
 const smtp = require('./smtp')
@@ -35,7 +34,8 @@ const server = app
 
 const io = socketIo(server)
 const onEmail = email => {
-  const id = email.id = uuid.v4()
+  const id = email.id
+  console.log(id)
   emails[id] = email
   io.emit('email:new', email)
 }

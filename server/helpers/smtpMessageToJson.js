@@ -1,9 +1,11 @@
 'use strict'
 
 const cheerio = require('cheerio')
+const uuid = require('node-uuid')
 
 const smtpMessageToJson = input => {
-  const parts = input.split('\n\r\n\r')
+  const parts = input.split('\r\n\r\n')
+  const id = uuid.v4()
   const meta = parts[0]
   const messageRaw = parts.slice(1).join('\n')
   const fieldsReg = /([a-z\-]*): ?(.*)/ig
@@ -30,15 +32,21 @@ const smtpMessageToJson = input => {
     .join('=')
 
   const $ = cheerio.load(message)
+  console.log('Generated id : ', id)
   $('body').append(
     `<script type="text/javascript">
       window.onload = function() {
-        window.parent.postMessage(document.body.scrollHeight, '*')
+        console.log('Posting to parent...')
+        window.parent.postMessage({
+          id: '${id}',
+          height: document.body.scrollHeight,
+        }, '*')
       }
     </script>`
   )
 
   email.message = $.html()
+  email.id = id
   return email
 }
 

@@ -4,13 +4,17 @@ export default class Mail extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { iframeHeight: '300px' }
+    this.state = { iframeHeight: 'auto' }
     this.renderMeta = this.renderMeta.bind(this)
     this.onIframeMessage = this.onIframeMessage.bind(this)
   }
 
   onIframeMessage(e) {
-    this.setState({ iframeHeight: `${e.data}px`})
+    const { id } = this.props
+
+    if (e.data.id === id) {
+      this.setState({ iframeHeight: `${e.data.height}px`})
+    }
   }
 
   renderMeta(meta, index) {
