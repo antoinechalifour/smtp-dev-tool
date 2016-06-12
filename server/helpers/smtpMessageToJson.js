@@ -8,7 +8,6 @@ const smtpMessageToJson = input => {
   const id = uuid.v4()
   const meta = parts[0]
   const messageRaw = parts.slice(1).join('\n')
-  const fieldsReg = /([a-z\-]*): ?(.*)/ig
   const email = meta.split('\n')
     .filter(str => str.length)
     .reduce((obj, current) => {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 export default class Search extends Component {
-  render() {
+  render () {
     const style = require('./search.css')
     const { onSearch } = this.props
 

@@ -14,7 +14,7 @@ module.exports = params => {
     name: smtpHost,
     onData: (stream, session, cb) => {
       let message = ''
-      stream.on('data', chunk => message += chunk)
+      stream.on('data', chunk => (message += chunk))
       stream.on('end', () => {
         const email = smtpMessageToJson(message)
         onEmail(email)

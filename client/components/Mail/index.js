@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 export default class Mail extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props)
 
     this.state = { iframeHeight: 'auto' }
@@ -9,15 +9,15 @@ export default class Mail extends Component {
     this.onIframeMessage = this.onIframeMessage.bind(this)
   }
 
-  onIframeMessage(e) {
+  onIframeMessage (e) {
     const { id } = this.props
 
     if (e.data.id === id) {
-      this.setState({ iframeHeight: `${e.data.height}px`})
+      this.setState({ iframeHeight: `${e.data.height}px` })
     }
   }
 
-  renderMeta(meta, index) {
+  renderMeta (meta, index) {
     const style = require('./mail.css')
 
     return (
@@ -28,35 +28,36 @@ export default class Mail extends Component {
     )
   }
 
-  componentWillMount() {
+  componentWillMount () {
     window.addEventListener('message', this.onIframeMessage)
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     window.removeEventListener('message', this.onIframeMessage)
   }
 
-  render() {
+  render () {
     const style = require('./mail.css')
     const { iframeHeight } = this.state
     const meta = Object.keys(this.props)
       .filter(x =>
-        x !== 'subject'
-        && x !== 'message'
-        && x !== 'from'
-        && x !== 'to'
-        && x !== 'date'
+        x !== 'subject' &&
+        x !== 'message' &&
+        x !== 'from' &&
+        x !== 'to' &&
+        x !== 'date'
       )
-      .map(key => ({ name: key, value: this.props[key]}))
+      .map(key => ({ name: key, value: this.props[key] }))
 
     const recipients = Object.keys(this.props)
       .filter(x =>
-        x === 'from'
-        || x === 'to'
+        x === 'from' ||
+        x === 'to'
       )
-      .map(key => ({ name: key, value: this.props[key]}))
+      .map(key => ({ name: key, value: this.props[key] }))
 
-    const { id, subject, date, message } = this.props
+    const { id, subject, date } = this.props
+    const server = __SERVER__ // eslint-disable-line
 
     return (
       <div className={style.mail}>
@@ -74,7 +75,7 @@ export default class Mail extends Component {
             <p>Sent on: {date}</p>
           </div>
           <iframe
-            src={`http://${__SERVER__}/mail/${id}`}
+            src={`http://${server}/mail/${id}`}
             className={style['mail-body']}
             height={iframeHeight}
           />

@@ -6,4 +6,4 @@ import './main.css'
 
 const el = document.querySelector('#app')
 
-render(<App  />, el)
+render(<App />, el)

@@ -1,11 +1,11 @@
-const env = process.env.NODE_ENV = process.env.NODE_ENV || 'dev'
+process.env.NODE_ENV = process.env.NODE_ENV || 'dev'
 const nodemailer = require('nodemailer')
 const config = require('../config')
 const smtpHost = config.smtp.host
 const smtpPort = config.smtp.port
 const transport = nodemailer.createTransport({
   host: smtpHost,
-  port: smtpPort,
+  port: smtpPort
 })
 
 const mailOptions = {
@@ -662,7 +662,7 @@ const mailOptions = {
         </center>
       </body>
     </html>
-  `,
+  `
   // text: 'Hello world',
 }
 

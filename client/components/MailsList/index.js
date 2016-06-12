@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import Mail from '../Mail'
 
 export default class MailsList extends Component {
-  renderEmpty() {
+  renderEmpty () {
     const style = require('./mails-list.css')
+    const smtp = __SMTP__ // eslint-disable-line
 
     return (
       <div>
@@ -11,14 +12,13 @@ export default class MailsList extends Component {
           Your dev mailbox is empty.
         </p>
         <p className={style['empty-message']}>
-          All messages sent to {__SMTP__} will appear on this page.
+          All messages sent to {smtp} will appear on this page.
         </p>
       </div>
     )
   }
 
-  renderList() {
-    const style = require('./mails-list.css')
+  renderList () {
     const { emails } = this.props
 
     return (
@@ -28,7 +28,7 @@ export default class MailsList extends Component {
     )
   }
 
-  render() {
+  render () {
     const style = require('./mails-list.css')
     const { emails } = this.props
     const content = emails.length === 0 ? this.renderEmpty() : this.renderList()

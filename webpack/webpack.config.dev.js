@@ -24,28 +24,28 @@ module.exports = {
   output: {
     path: path.join(__dirname, '../public'),
     publicPath: `http://${devServer}/`,
-    filename: '[name].[hash].js',
+    filename: '[name].[hash].js'
   },
   module: {
     loaders: [{
       test: /\.jsx?$/,
       loaders: ['react-hot', 'babel'],
-      exclude: /node_modules/,
+      exclude: /node_modules/
     }, {
       test: /\.css$/,
-      loader: ExtractTextPlugin.extract('style', 'css?modules'),
-    }],
+      loader: ExtractTextPlugin.extract('style', 'css?modules')
+    }]
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin('[name].[hash].css'),
     new HtmlPlugin({
       template: path.join(__dirname, '../client/index.html'),
-      inject: 'body',
+      inject: 'body'
     }),
     new webpack.DefinePlugin({
       __SERVER__: JSON.stringify(`${socketHost}:${socketPort}`),
-      __SMTP__: JSON.stringify(smtpServer),
+      __SMTP__: JSON.stringify(smtpServer)
     })
   ],
   devServer: {
@@ -58,7 +58,7 @@ module.exports = {
       modules: false,
       cached: false,
       colors: true,
-      chunk: false,
-    },
-  },
+      chunk: false
+    }
+  }
 }
