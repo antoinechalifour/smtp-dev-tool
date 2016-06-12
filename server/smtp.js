@@ -7,7 +7,7 @@ const config = require('../config')
 const smtpHost = config.smtp.host
 
 module.exports = params => {
-  const io = params.io
+  const onEmail = params.onEmail
 
   const smtp = new SMTPServer({
     disabledCommands: ['AUTH', 'STARTTLS'],
@@ -17,7 +17,7 @@ module.exports = params => {
       stream.on('data', chunk => message += chunk)
       stream.on('end', () => {
         const email = smtpMessageToJson(message)
-        io.emit('email:new', email)
+        onEmail(email)
 
         cb()
       })

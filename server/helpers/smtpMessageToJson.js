@@ -1,36 +1,29 @@
 const smtpMessageToJson = input => {
+  const parts = input.split('\n\r\n\r')
+  const meta = parts[0]
+  const messageRaw = parts.slice(1).join('\n')
   const fieldsReg = /([a-z\-]*): ?(.*)/ig
-  const params = input.split('\n')
-    .map(line => {
-      const isMatch = line.match(fieldsReg)
-      const json = {}
-      if (isMatch) {
-        const parts = line.split(':')
-        const key = parts[0].toLowerCase().trim()
-        json[key] = parts[1]
-      } else if (~line.indexOf('SMTP/')) {
-        json.smtp = line
-      } else if (line.trim().length > 0) {
-        json.message = line
+  const email = meta.split('\n')
+    .filter(str => str.length)
+    .reduce((obj, current) => {
+      if (~current.indexOf('SMTP/')) {
+        obj.smtp = current
+      } else {
+        const sep = current.indexOf(':')
+        const key = current.substr(0, sep).trim().toLowerCase()
+        const value = current.substr(sep + 1).trim()
+
+        obj[key] = value
       }
 
-      return json
-    })
-    .filter(json => Object.keys(json).length)
+      return obj
+    }, {})
 
-  const message = params
-    .filter(field => !!field.message)
-    .reduce((concat, current) => {
-      concat += '\n'
-      concat += current.message
-      return concat
-    }, '')
-
-  const email = params.reduce((obj, current) => {
-    Object.assign(obj, current)
-    return obj
-  }, {})
-
+  const message = messageRaw
+    .split('=\r\n')
+    .join(' ')
+    .split('=3D')
+    .join('=')
   email.message = message
   return email
 }

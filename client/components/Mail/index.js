@@ -37,7 +37,8 @@ export default class Mail extends Component {
       )
       .map(key => ({ name: key, value: this.props[key]}))
 
-    const { subject, date, message } = this.props
+    const { id, subject, date, message } = this.props
+    console.log(this.props)
 
     return (
       <div className={style.mail}>
@@ -54,9 +55,9 @@ export default class Mail extends Component {
             <h2>Subject: {subject}</h2>
             <p>Sent on: {date}</p>
           </div>
-          <div
+          <iframe
+            src={`http://${__SERVER__}/mail/${id}`}
             className={style['mail-body']}
-            dangerouslySetInnerHTML={{__html: message}}
           />
         </div>
       </div>

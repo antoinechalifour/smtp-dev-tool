@@ -66,6 +66,9 @@
   "license": "ISC",
   "dependencies": {
     "classnames": "^2.2.5",
+    "compression": "^1.6.2",
+    "express": "^4.13.4",
+    "node-uuid": "^1.4.7",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "reset.css": "^2.0.2",
