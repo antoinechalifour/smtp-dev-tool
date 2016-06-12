@@ -1,3 +1,5 @@
+[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
+
 # smtp-dev-tool
 
 ![Screenshot](http://i.imgur.com/vtkL51P.gif)
