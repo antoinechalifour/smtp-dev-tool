@@ -1,6 +1,6 @@
 # smtp-dev-tool
 
-[Screenshot](http://i.imgur.com/OojQ6wm.gifv)
+[Screenshot](http://i.imgur.com/OojQ6wm.gif)
 A local SMTP to use in your dev environment.
 
 ## Features
